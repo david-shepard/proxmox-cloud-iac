@@ -1,0 +1,42 @@
+# General
+**/*.log
+**/*.tmp
+**/*.temp
+**/*.bak
+**/*.swp
+**/*.swo
+**/*.DS_Store
+**/.DS_Store
+**/Thumbs.db
+**/.Thumbs.db
+**/.Spotlight-V100
+**/.Trashes
+**/*.~lock.*
+**/*.pid
+**/*.seed
+**/*.pid.lock
+**/*.seed.lock
+**/*.log.lock
+**/*.tmp.lock
+**/*.temp.lock
+**/*.bak.lock
+**/*.swp.lock
+**/*.swo.lock
+**/*.DS_Store.lock
+**/.DS_Store.lock
+**/Thumbs.db.lock
+**/.Thumbs.db.lock
+**/.Spotlight-V100.lock
+**/.Trashes.lock
+**/*.~lock.*.lock
+
+# Python
+**/__pycache__/
+**/*.pyc
+
+# Terraform
+**/*.tfstate*
+**/.terraform/
+**/terraform.tfstate.lock.info
+**/*.tfplan
+**/*.local*
