@@ -1,13 +1,13 @@
-# Proxmox Cloud IaC
+# Proxmox + Cloud IaC
 
-Infrastructure as Code for hybrid Proxmox homelab and cloud infrastructure using Terraform and Ansible.
+Infrastructure as Code for my hybrid Proxmox homelab and cloud infrastructure using Terraform and Ansible.
 
 ## Overview
 
 This repository contains Infrastructure as Code (IaC) for:
 
 - **Local Homelab**: Proxmox Virtual Environment with LXC containers
-- **Cloud VPS**: Oracle Cloud infrastructure (planned)
+- **Cloud VPS**: Oracle Cloud infrastructure (free tier)
 
 ## Architecture
 
@@ -25,13 +25,25 @@ proxmox-cloud-iac/
 
 ### Infrastructure (Terraform)
 
-The Proxmox Terraform configuration provisions the following LXC containers:
+The Proxmox Terraform configuration manages the following (meager) resources on my homelab.
+(TODO: scour ebay for homelab deals)
 
 | Container | VMID | Purpose | Resources |
 |-----------|------|---------|-----------|
 | Nextcloud | 101 | Cloud storage and collaboration | 1 core, 1GB RAM, 15GB disk |
 | K3s Master | 102 | Kubernetes cluster | 2 cores, 4GB RAM, 80GB disk |
 | OpenWebUI | 100 | AI interface | 2 cores, 4GB RAM, 50GB disk |
+
+
+### Infrastructure (Oracle)
+(TODO: need to update w/ terraform and ansible configs)
+Managed @ https://github.com/david-shepard/flux-infra
+
+| VM | CPU | MEM | HD |
+|-----------|------|---------|-----------|
+| Oracle ARM VPS Instance | 4 VCPU | 25GB RAM | 200GB disk |
+
+
 
 #### Prerequisites
 
@@ -66,9 +78,9 @@ Ansible playbooks automate configuration and maintenance tasks for Proxmox hosts
 #### Inventory
 
 The inventory (`ansible/proxmox/hosts.yaml`) defines:
-- **proxmox_hosts**: Proxmox hypervisor nodes
-- **lxc_containers**: Managed LXC containers
-- **proxmox_managed**: All Proxmox-related infrastructure
+- **proxmox_hosts**: Proxmox VM's
+- **lxc_containers**: Proxmox LXC containers
+- **proxmox_managed**: Group for VM's & LXC's combined
 
 #### Available Playbooks
 
@@ -90,14 +102,6 @@ ansible-playbook -i hosts.yaml backup_etc_dirs.yml
 # Run specific playbook with verbose output
 ansible-playbook -i hosts.yaml <playbook>.yml -v
 ```
-
-## Oracle Cloud VPS (Planned)
-
-The Oracle Cloud infrastructure is prepared but not yet implemented. This will include:
-
-- Terraform configurations for OCI compute instances
-- Ansible playbooks for VPS configuration and management
-- Integration with the Proxmox homelab for hybrid cloud workloads
 
 ## Prerequisites
 
@@ -142,10 +146,8 @@ chmod 600 ~/.ssh/proxmox
 │       ├── ansible.cfg
 │       ├── backup_etc_dirs.yml
 │       ├── backups/
-│       ├── cronjob-per-host-block.yml
+│       ├── cronjob-healtchecks.yml
 │       ├── debug_hosts.yml
-│       ├── example_cron-per-host-map.yml
-│       ├── example-playbook-loop.yml
 │       ├── files/
 │       ├── host_vars/
 │       ├── hosts.yaml
@@ -165,4 +167,3 @@ chmod 600 ~/.ssh/proxmox
 - [ ] Add VM Proxmox configuration
 - [ ] Refactor module(s) out of terraform configuration
 - [ ] Integrate with my other repos [david-shepard/flux-infra](https://github.com/david-shepard/flux-infra) and [david-shepard/proxmox-k3s](https://github.com/david-shepard/proxmox-k3s)
-# proxmox-cloud-iac
