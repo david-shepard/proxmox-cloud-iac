@@ -1,0 +1,26 @@
+- name: Configure a healthcheck.io cron job per host
+  # hosts: lxc_containers
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure the cron script is present
+      ansible.builtin.copy:
+        src: files/healthcheck-cron.sh
+        dest: /usr/local/bin/healthcheck-cron.sh
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Add a cron job with host-specific arguments
+      ansible.builtin.cron:
+        name: "Run custom script with args"
+        ### format 47 6 * * 7
+        minute: "47"
+        hour: "6"
+        day: "*"
+        month: "*"
+        weekday: "7"
+        job: "/usr/local/bin/healthcheck-cron.sh {{ healthcheck_id }}"
+        user: root
+        state: present

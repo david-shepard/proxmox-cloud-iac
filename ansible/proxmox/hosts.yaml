@@ -1,0 +1,31 @@
+all:
+  children:
+    proxmox_hosts:
+      # Only the Proxmox servers themselves
+      hosts:
+        pve-samsung:
+          # names from ~/.ssh/config
+          ansible_host: pve-samsung
+          ansible_ssh_private_key_file: ~/.ssh/proxmox
+        pve2:
+          ansible_host: pve2
+          ansible_ssh_private_key_file: ~/.ssh/proxmox
+    lxc_containers:
+      # Only the containers
+      hosts:
+        nextcloud:
+          ansible_host: nextcloud
+          ansible_ssh_private_key_file: ~/.ssh/proxmox
+        k3lxc:
+          ansible_host: k3svm
+          ansible_ssh_private_key_file: ~/.ssh/proxmox
+
+    proxmox_managed:
+      # Everything managed by Proxmox (if you need this)
+      children:
+        proxmox_hosts:
+        lxc_containers:
+
+
+  vars:
+    ansible_user: root

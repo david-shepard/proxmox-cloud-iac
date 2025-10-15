@@ -1,0 +1,8 @@
+# ansible
+**/*.retry
+**/__pycache__/
+**/*.pyc
+ansible.cfg
+.vault-passwords*
+backups/
+*.local*

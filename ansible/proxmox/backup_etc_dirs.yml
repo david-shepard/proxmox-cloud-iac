@@ -1,0 +1,14 @@
+---
+- name: Check free disk space on specified Ubuntu server
+  hosts: proxmox_hosts
+  gather_facts: no
+  tasks:
+    # pulls /etc/ dir from each VM on proxmox
+    - name: Synchronize remote directory to local backup directory
+      ansible.posix.synchronize:
+        src: /etc
+        dest: ./backups/{{ inventory_hostname }}/dirs
+        mode: pull
+        archive: yes
+        delete: no
+      delegate_to: localhost

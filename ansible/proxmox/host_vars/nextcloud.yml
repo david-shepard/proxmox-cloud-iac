@@ -1,0 +1,3 @@
+---
+# Specific healthcheck.io id for 'nextcloud'
+healthcheck_id: < insert id here >

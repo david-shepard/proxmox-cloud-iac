@@ -1,0 +1,17 @@
+---
+- name: Check free disk space on specified Ubuntu server
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Gather disk space information
+      command: df -h /
+      register: disk_space
+    - name: Display disk space
+      debug:
+        msg: "{{ disk_space.stdout }}"
+    - name: Get IP Address
+      shell: "ip a"
+      register: ip_info
+    - name: Display ip information
+      debug:
+        msg: "{{ ip_info.stdout }}"
