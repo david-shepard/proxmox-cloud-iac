@@ -1,3 +1,3 @@
 ---
-# Specific healthcheck id for 'k3lxc'
-healthcheck_id: 8080ee26ad11-03c3-447a-9d5d-213d0b6ac1e2
+# Specific healthcheck.io id for 'k3lxc'
+healthcheck_id: < insert id here >
